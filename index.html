@@ -14,6 +14,7 @@
    ============================================================ */
 :root{
   --cobalt:#1b50a3;        /* bleu logo + vagues */
+  --sun:#e07a3b;           /* accent Animations */
   --ink:#1a1a1a;           /* titres + prix (noir comme le PDF) */
   --muted:#5d6b7e;         /* descriptions */
   --squiggle:#3a4a5e;      /* fine vague des titres */
@@ -34,6 +35,9 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Open Sans",syst
 .tab{flex:none;border:0;background:transparent;cursor:pointer;font-family:"Montserrat",sans-serif;font-weight:700;font-size:13.5px;color:var(--muted);padding:7px 15px;border-radius:999px;white-space:nowrap;transition:.15s}
 .tab:hover{color:var(--cobalt)}
 .tab[aria-selected="true"]{background:var(--cobalt);color:#fff}
+.tab.tab-anim{color:#fff;font-weight:800;background:linear-gradient(120deg,#ffa63d,#ff6f4d 55%,#ff5e8a);box-shadow:0 3px 10px -4px rgba(255,110,90,.55)}
+.tab.tab-anim:hover{filter:brightness(1.06)}
+.tab.tab-anim[aria-selected="true"]{box-shadow:0 0 0 2px #fff inset,0 6px 16px -5px rgba(255,90,120,.7);filter:saturate(1.12)}
 .tab:focus-visible{outline:3px solid var(--cobalt);outline-offset:2px}
 .page{display:none}
 .page.active{display:block}
@@ -135,6 +139,17 @@ footer{max-width:920px;margin:0 auto;padding:24px 22px 46px;text-align:center}
 .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
 .chip{font-size:11px;font-weight:700;color:var(--cobalt);background:#eef3fb;border:1px solid #d6e2f4;border-radius:999px;padding:2px 9px}
 .chip-warn{color:#9a5b00;background:#fff4e0;border-color:#f0d9a8}
+/* animations */
+.animbox{max-width:820px;margin:0 auto}
+.animbox h2{font-family:"Montserrat",sans-serif;font-weight:800;font-size:25px;text-align:center;margin:4px 0 6px;color:var(--ink)}
+.animgrid{display:grid;gap:24px}
+@media(min-width:640px){.animgrid{grid-template-columns:1fr 1fr}}
+.animcol h3{font-family:"Montserrat",sans-serif;font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:#fff;background:var(--cobalt);text-align:center;padding:8px;border-radius:10px;margin:0 0 10px}
+.ev{display:flex;gap:12px;align-items:baseline;padding:8px 4px;border-bottom:1px solid #f1f1f1}
+.ev:last-child{border-bottom:0}
+.evd{flex:none;font-family:"Montserrat",sans-serif;font-weight:800;color:var(--cobalt);width:26px;text-align:center}
+.eva{font-weight:600;font-size:15px}
+.evg{font-size:12px;color:var(--muted);font-weight:700}
 
 
 /* ---------- Impression / PDF ---------- */
@@ -205,6 +220,8 @@ const UI = {
   allTitle: {fr:"Allergies & intolérances", en:"Allergies & intolerances", de:"Allergien & Unverträglichkeiten", nl:"Allergieën & intoleranties", es:"Alergias e intolerancias"},
   allBody:  {fr:"Une allergie ou une intolérance alimentaire ? Consultez notre fiche allergènes détaillée, ou demandez à notre équipe.", en:"A food allergy or intolerance? Check our detailed allergen sheet, or just ask our team.", de:"Eine Lebensmittelallergie oder -unverträglichkeit? Sehen Sie unser Allergen-Datenblatt oder fragen Sie unser Team.", nl:"Een voedselallergie of -intolerantie? Bekijk ons allergenenoverzicht of vraag het ons team.", es:"¿Una alergia o intolerancia alimentaria? Consulte nuestra ficha de alérgenos o pregunte a nuestro equipo."},
   allBtn:   {fr:"Voir la fiche allergènes", en:"View allergen sheet", de:"Allergen-Datenblatt ansehen", nl:"Allergenenoverzicht bekijken", es:"Ver ficha de alérgenos"},
+  animTitle:{fr:"Concerts 2026", en:"Concerts 2026", de:"Konzerte 2026", nl:"Concerten 2026", es:"Conciertos 2026"},
+  animIntro:{fr:"Nos concerts & DJ sets de l'été, en direct au BaïNE.", en:"Our summer concerts & DJ sets, live at BaïNE.", de:"Unsere Sommerkonzerte & DJ-Sets, live im BaïNE.", nl:"Onze zomerconcerten & dj-sets, live in BaïNE.", es:"Nuestros conciertos y DJ sets de verano, en directo en BaïNE."},
   allDisc:  {fr:"Des traces d'autres allergènes sont possibles. Pour toute allergie ou intolérance, parlez-en à notre équipe.", en:"Traces of other allergens are possible. For any allergy or intolerance, please speak to our team.", de:"Spuren anderer Allergene sind möglich. Bei Allergien oder Unverträglichkeiten sprechen Sie bitte unser Team an.", nl:"Sporen van andere allergenen zijn mogelijk. Voor allergieën of intoleranties, vraag het ons team.", es:"Es posible que haya trazas de otros alérgenos. Para cualquier alergia o intolerancia, hable con nuestro equipo."},
   enter:    {fr:"Bienvenue", en:"Welcome", de:"Willkommen", nl:"Welkom", es:"Bienvenido"},
   chooseLang:{fr:"Choisissez votre langue", en:"Choose your language", de:"Wählen Sie Ihre Sprache", nl:"Kies uw taal", es:"Elige tu idioma"},
@@ -217,7 +234,8 @@ const PAGES = [
   {fr:"À la carte", en:"À la carte", de:"À la carte", nl:"À la carte", es:"À la carte"},
   {fr:"Desserts",   en:"Desserts",   de:"Desserts",   nl:"Desserts",   es:"Postres"},
   {fr:"Boissons",   en:"Drinks",     de:"Getränke",   nl:"Dranken",    es:"Bebidas"},
-  {fr:"Allergènes", en:"Allergens",  de:"Allergene",  nl:"Allergenen", es:"Alérgenos"}
+  {fr:"Allergènes", en:"Allergens",  de:"Allergene",  nl:"Allergenen", es:"Alérgenos"},
+  {fr:"Animations", en:"Events",     de:"Events",     nl:"Agenda",     es:"Agenda"}
 ];
 const eur = v => v + " €";
 
@@ -531,6 +549,31 @@ function renderAllergens(){
   return `<div class="allbox"><h2>${esc(t(UI.allTitle))}</h2><p class="all-disc">${esc(t(UI.allDisc))}</p>${secs}</div>`;
 }
 
+
+/* ===== Animations / Concerts 2026 ===== */
+const MONTHS={jul:{fr:"Juillet",en:"July",de:"Juli",nl:"Juli",es:"Julio"},aug:{fr:"Août",en:"August",de:"August",nl:"Augustus",es:"Agosto"}};
+const ANIM=[
+ {m:"jul", ev:[
+   {d:"03",a:"Youced",g:"DJ"},{d:"09",a:"Talks Me Do",g:"pop/rock"},{d:"11",a:"Youced",g:"DJ"},
+   {d:"12",a:"Close to Fire",g:"pop"},{d:"17",a:"Summer and Friends"},{d:"18",a:"Youced",g:"DJ"},
+   {d:"23",a:"Close to Fire",g:"pop"},{d:"24",a:"Youced",g:"DJ"},{d:"26",a:"NIEK",g:"pop"},
+   {d:"30",a:"Summer and Friends"}
+ ]},
+ {m:"aug", ev:[
+   {d:"01",a:"Youced",g:"DJ"},{d:"06",a:"NIEK",g:"pop"},{d:"08",a:"Youced",g:"DJ"},
+   {d:"09",a:"Simon Benedict",g:"pop"},{d:"13",a:"Summer and Friends"},{d:"14",a:"Youced",g:"DJ"},
+   {d:"20",a:"Simon Benedict",g:"pop"},{d:"22",a:"Youced",g:"DJ"},{d:"23",a:"New Dawn",g:"pop/rock"},
+   {d:"27",a:"Summer and Friends"}
+ ]}
+];
+function renderAnimations(){
+  const cols=ANIM.map(mo=>{
+    const rows=mo.ev.map(e=>`<div class="ev"><span class="evd">${esc(e.d)}</span><span class="eva">${esc(e.a)}${e.g?` <span class="evg">(${esc(e.g)})</span>`:""}</span></div>`).join("");
+    return `<div class="animcol"><h3>${esc(t(MONTHS[mo.m]))}</h3>${rows}</div>`;
+  }).join("");
+  return `<div class="animbox"><h2>${esc(t(UI.animTitle))}</h2><p class="all-disc">${esc(t(UI.animIntro))}</p><div class="animgrid">${cols}</div></div>`;
+}
+
 function renderMenu(){
   let pagesHtml = GROUPS.map((g,i)=>
     `<section class="page${i===page?' active':''}" data-page="${i}">`+
@@ -539,10 +582,12 @@ function renderMenu(){
   ).join("");
   const ai = GROUPS.length;
   pagesHtml += `<section class="page${ai===page?' active':''}" data-page="${ai}">`+renderAllergens()+`</section>`;
+  const anim = GROUPS.length+1;
+  pagesHtml += `<section class="page${anim===page?' active':''}" data-page="${anim}">`+renderAnimations()+`</section>`;
   document.getElementById("menu").innerHTML = pagesHtml;
 
   document.getElementById("tabs").innerHTML = PAGES.map((p,i)=>
-    `<button class="tab" type="button" role="tab" data-p="${i}" aria-selected="${i===page}">${esc(t(p))}</button>`
+    `<button class="tab${i===PAGES.length-1?' tab-anim':''}" type="button" role="tab" data-p="${i}" aria-selected="${i===page}">${esc(t(p))}</button>`
   ).join("");
 
   document.querySelectorAll("[data-ui]").forEach(el=>{ el.textContent = t(UI[el.dataset.ui]); });
